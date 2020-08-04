@@ -13,6 +13,7 @@ import dev.forcetower.instascan.core.model.storage.Account
 import dev.forcetower.instascan.databinding.FragmentAccountImporterBinding
 import dev.forcetower.instascan.view.login.LoginViewModel
 import dev.forcetower.toolkit.components.BaseDialogFragment
+import dev.forcetower.toolkit.lifecycle.EventObserver
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -34,11 +35,15 @@ class ImporterSheet : BaseDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val accounts = requireArguments().getParcelableArrayList<InstagramAccountDTO>("accounts")!!
-        val importerAdapter = ImporterAdapter()
+        val importerAdapter = ImporterAdapter(viewModel)
         importerAdapter.submitList(accounts)
         binding.recycler.apply {
             adapter = importerAdapter
         }
+
+        viewModel.onAccountImported.observe(this, EventObserver {
+            dismiss()
+        })
     }
 
     override fun onCancel(dialog: DialogInterface) {

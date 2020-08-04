@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
@@ -51,6 +50,13 @@ class LoginFragment : BaseFragment() {
         viewModel.onReceivedAccounts.observe(viewLifecycleOwner, Observer {
             onAccountsReceived(it)
         })
+        viewModel.onImportCompleted.observe(viewLifecycleOwner, EventObserver {
+            onAccountImported(it)
+        })
+    }
+
+    private fun onAccountImported(account: InstagramAccountDTO) {
+        Timber.d("Account imported: $account")
     }
 
     private fun onLoginResult(result: LoginResult) {

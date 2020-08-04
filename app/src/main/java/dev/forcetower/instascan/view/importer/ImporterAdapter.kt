@@ -9,7 +9,9 @@ import dev.forcetower.instascan.core.model.dto.InstagramAccountDTO
 import dev.forcetower.instascan.databinding.ItemAccountImportBinding
 import dev.forcetower.toolkit.extensions.inflate
 
-class ImporterAdapter : ListAdapter<InstagramAccountDTO, ImporterAdapter.AccountHolder>(DiffCallback) {
+class ImporterAdapter(
+    private val actions: ImporterActions
+) : ListAdapter<InstagramAccountDTO, ImporterAdapter.AccountHolder>(DiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AccountHolder {
         return AccountHolder(parent.inflate(R.layout.item_account_import))
     }
@@ -18,7 +20,9 @@ class ImporterAdapter : ListAdapter<InstagramAccountDTO, ImporterAdapter.Account
         holder.binding.account = getItem(position)
     }
 
-    inner class AccountHolder(val binding: ItemAccountImportBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class AccountHolder(val binding: ItemAccountImportBinding) : RecyclerView.ViewHolder(binding.root) {
+        init { binding.actions = actions }
+    }
     private object DiffCallback : DiffUtil.ItemCallback<InstagramAccountDTO>() {
         override fun areItemsTheSame(
             oldItem: InstagramAccountDTO,
