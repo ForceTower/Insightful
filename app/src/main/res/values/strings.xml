@@ -1,3 +1,14 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:locale="pt-BR">
+    <string translatable="false" name="facebook_app_id">3128773063870888</string>
+    <string translatable="false" name="fb_login_protocol_scheme">fb3128773063870888</string>
+
     <string name="app_name">InstaScan</string>
+    <string name="login_welcome">Boas vindas ao InstaScan</string>
+    <string name="login_welcome_desc">Fique por dentro de todas as informações relevantes sobre o seu Instagram!</string>
+    <string name="login_facebook">Entrar com o Facebook</string>
+    <string name="facebook_login_cancel">Login com Facebook cancelado</string>
+    <string name="facebook_login_error">Erro ao conectar com o Facebook :(</string>
+    <string name="no_commercial_instagram_linked">Nenhuma conta comercial vinculada</string>
+    <string name="importer_select_account">Qual conta quer usar?</string>
 </resources>
