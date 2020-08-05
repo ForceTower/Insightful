@@ -1,5 +1,5 @@
 <resources>
-    <style name="InstaScan" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="InstaScan" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
