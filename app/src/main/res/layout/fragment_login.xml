@@ -54,6 +54,7 @@
                 android:layout_height="56dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/login_facebook"
+                android:textColor="?attr/colorOnPrimary"
                 android:letterSpacing="0.01"
                 android:textAllCaps="false"
                 android:onClick="@{() -> actions.onFacebookLogin()}"

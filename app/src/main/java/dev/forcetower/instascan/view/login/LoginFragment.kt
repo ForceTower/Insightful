@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,6 +58,8 @@ class LoginFragment : BaseFragment() {
 
     private fun onAccountImported(account: InstagramAccountDTO) {
         Timber.d("Account imported: $account")
+        val directions = LoginFragmentDirections.actionLoginToHome()
+        findNavController().navigate(directions)
     }
 
     private fun onLoginResult(result: LoginResult) {

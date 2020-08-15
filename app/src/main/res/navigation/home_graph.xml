@@ -9,5 +9,19 @@
         android:id="@+id/login"
         android:name="dev.forcetower.instascan.view.login.LoginFragment"
         android:label="Login"
-        tools:layout="@layout/fragment_login"/>
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_login_to_home"
+            app:destination="@id/home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/home"
+        android:name="dev.forcetower.instascan.view.home.HomeFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_home"/>
+    <action
+        android:id="@+id/action_global_home"
+        app:destination="@id/home"
+        app:popUpTo="@id/home_graph.xml" />
 </navigation>
