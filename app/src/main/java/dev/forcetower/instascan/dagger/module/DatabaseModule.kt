@@ -1,4 +1,4 @@
-package dev.forcetower.instascan.dagger
+package dev.forcetower.instascan.dagger.module
 
 import android.content.Context
 import androidx.room.Room

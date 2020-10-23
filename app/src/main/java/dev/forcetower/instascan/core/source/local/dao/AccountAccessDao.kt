@@ -8,7 +8,21 @@ import dev.forcetower.toolkit.database.dao.BaseDao
 
 @Dao
 abstract class AccountAccessDao : BaseDao<AccountAccess>() {
-    @Suppress("FunctionName")
     @Query("SELECT accessToken FROM AccountAccess WHERE selected = 1")
-    abstract fun UNSAFE_getCurrentAccessToken(): String?
+    abstract fun getCurrentAccessTokenDirect(): String?
+
+    @Query("SELECT accessToken FROM AccountAccess WHERE selected = 1")
+    abstract suspend fun getCurrentAccessToken(): String?
+
+    @Query("SELECT * FROM AccountAccess WHERE id = :id")
+    abstract suspend fun getAccountAccess(id: String): AccountAccess?
+
+    @Query("SELECT * FROM AccountAccess WHERE selected = 1")
+    abstract suspend fun getCurrentAccountAccess(): AccountAccess?
+
+    @Query("SELECT * FROM AccountAccess")
+    abstract suspend fun getAll(): List<AccountAccess>
+
+    @Query("SELECT accessToken FROM AccountAccess")
+    abstract suspend fun getAllIds(): List<String>
 }

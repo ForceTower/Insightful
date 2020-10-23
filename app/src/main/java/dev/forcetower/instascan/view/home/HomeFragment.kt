@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ConcatAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import dev.forcetower.instascan.R
@@ -13,6 +14,7 @@ import dev.forcetower.toolkit.components.BaseFragment
 @AndroidEntryPoint
 class HomeFragment : BaseFragment() {
     private lateinit var binding: FragmentHomeBinding
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,5 +37,7 @@ class HomeFragment : BaseFragment() {
         featureAdapter.submitList(listOf(
             HomeFeature("Analise de Mídias", "Descubra estatisticas interessantes sobre suas mídias", R.drawable.likes_lookup, R.color.likes_lookup)
         ))
+
+        viewModel.syncCurrent()
     }
 }

@@ -8,7 +8,7 @@ apply plugin: 'org.jmailen.kotlinter'
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.1"
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "dev.forcetower.instascan"
@@ -49,6 +49,7 @@ android {
     }
 
     compileOptions {
+        coreLibraryDesugaringEnabled true
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
     }
@@ -59,6 +60,7 @@ android {
 }
 
 dependencies {
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.10'
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(':toolkit')
 
@@ -72,9 +74,9 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipe_refresh"
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout"
     implementation "com.google.android.material:material:$google_material"
-    implementation "androidx.recyclerview:recyclerview:1.2.0-alpha05"
-    implementation "androidx.palette:palette:$pallete"
-    implementation "androidx.fragment:fragment:$fragment"
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha06'
+    implementation "androidx.palette:palette-ktx:$pallete"
+    implementation "androidx.fragment:fragment-ktx:$fragment"
     implementation "androidx.fragment:fragment-ktx:$fragment"
     implementation "androidx.viewpager2:viewpager2:$view_pager"
 
@@ -85,9 +87,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle"
 
-    implementation "androidx.navigation:navigation-ui:$navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation"
-    implementation "androidx.navigation:navigation-fragment:$navigation"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation"
 
     // Paging
@@ -122,8 +122,8 @@ dependencies {
     implementation 'com.facebook.android:facebook-android-sdk:4.42.0'
 
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation 'junit:junit:4.13.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
 }

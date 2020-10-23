@@ -1,4 +1,4 @@
-package dev.forcetower.instascan.dagger
+package dev.forcetower.instascan.dagger.module
 
 import com.google.gson.Gson
 import dagger.Module
@@ -16,7 +16,7 @@ import javax.inject.Singleton
 object ServiceModule {
     @Provides
     @Singleton
-    fun provideTMDbService(client: OkHttpClient, gson: Gson): FacebookGraph {
+    fun provideFacebookService(client: OkHttpClient, gson: Gson): FacebookGraph {
         return Retrofit.Builder()
             .baseUrl("https://graph.facebook.com/v4.0/")
             .client(client)
