@@ -11,6 +11,7 @@ import dev.forcetower.instascan.BuildConfig
 import dev.forcetower.instascan.core.source.local.InstrackDB
 import dev.forcetower.instascan.core.utils.GsonUtils
 import dev.forcetower.instascan.dagger.annotation.AccessTokenInjectorInterceptor
+import dev.forcetower.instascan.dagger.annotation.FlagRemoveInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -25,17 +26,19 @@ object AppModule {
     @Provides
     @Singleton
     fun provideClient(
-        @AccessTokenInjectorInterceptor accessInject: Interceptor
+        @AccessTokenInjectorInterceptor accessInject: Interceptor,
+        @FlagRemoveInterceptor flagRemove: Interceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .followRedirects(true)
             .connectTimeout(20, TimeUnit.SECONDS)
             .readTimeout(20, TimeUnit.SECONDS)
             .writeTimeout(20, TimeUnit.SECONDS)
+            .addInterceptor(flagRemove)
             .addInterceptor(accessInject)
             .addInterceptor(HttpLoggingInterceptor { message -> Timber.d(message) }.apply {
                 level = if (BuildConfig.DEBUG)
-                    HttpLoggingInterceptor.Level.BASIC
+                    HttpLoggingInterceptor.Level.BODY
                 else
                     HttpLoggingInterceptor.Level.NONE
             })
@@ -71,6 +74,19 @@ object AppModule {
         } else {
             chain.proceed(original)
         }
+    }
+
+    @Provides
+    @Singleton
+    @FlagRemoveInterceptor
+    fun flagRemoveInterceptor() = Interceptor { chain ->
+        val original = chain.request()
+        val originalUrl = original.url
+
+        val url = originalUrl.newBuilder().removeAllQueryParameters("remove_ignore").build()
+        val request = original.newBuilder().url(url).build()
+
+        chain.proceed(request)
     }
 
     @Provides

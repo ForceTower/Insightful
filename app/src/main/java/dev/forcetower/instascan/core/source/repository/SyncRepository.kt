@@ -42,21 +42,22 @@ class SyncRepository @Inject constructor(
         val response = service.medias(id)
         val complete = mutableListOf<Media>()
 
-        val data = response.media.data.map { it.toMedia() }
+        val data = response.media?.data?.map { it.toMedia() } ?: emptyList()
         complete += data
 
-        var after = response.media.paging?.cursors?.after
+        var after = response.media?.paging?.cursors?.after
         var hasNext = after != null && data.isNotEmpty()
 
         while (hasNext && after != null) {
             val continuation = service.mediasAfter(id, after)
-            val appendData = continuation.media.data.map { it.toMedia() }
+            val appendData = continuation.media?.data?.map { it.toMedia() } ?: emptyList()
             complete += appendData
 
-            after = continuation.media.paging?.cursors?.after
+            after = continuation.media?.paging?.cursors?.after
             hasNext = after != null && appendData.isNotEmpty()
         }
 
+        Timber.d("All medias fetched: $complete")
         database.media().insertOrUpdate(complete)
     }
 }

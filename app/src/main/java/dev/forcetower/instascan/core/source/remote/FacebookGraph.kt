@@ -21,16 +21,16 @@ interface FacebookGraph {
         @Query("fields") fields: String = "instagram_business_account{followers_count,follows_count,name,username,profile_picture_url,ig_id,biography,id},name,picture"
     ): InstagramPageDTO
 
-    @GET("{instagramId}")
+    @GET("{profileId}")
     suspend fun medias(
-        @Path("instagramId") instagramId: String,
+        @Path("profileId") profileId: String,
         @Query("fields") fields: String = "media.limit(250){id,caption,ig_id,comments_count,like_count,media_type,thumbnail_url,media_url,owner,timestamp,permalink,filter_name}"
     ): MediaResponse
 
-    @GET("{mediaId}?fields=media.after({after}).limit({limit}){id,caption,ig_id,comments_count,like_count,media_type,thumbnail_url,media_url,owner,timestamp,permalink,filter_name}")
+    @GET("{profileId}")
     suspend fun mediasAfter(
-        @Path("mediaId") instagramId: String,
-        @Path("after") after: String,
-        @Path("limit") limit: Int = 250
+        @Path("profileId") profileId: String,
+        @Query("remove_ignore") after: String,
+        @Query("fields") fields: String = "media.after($after).limit(250){id,caption,ig_id,comments_count,like_count,media_type,thumbnail_url,media_url,owner,timestamp,permalink,filter_name}"
     ): MediaResponse
 }
