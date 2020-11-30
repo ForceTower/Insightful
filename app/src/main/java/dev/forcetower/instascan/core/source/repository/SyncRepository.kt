@@ -1,6 +1,7 @@
 package dev.forcetower.instascan.core.source.repository
 
 import dev.forcetower.instascan.core.model.storage.Media
+import dev.forcetower.instascan.core.model.storage.Story
 import dev.forcetower.instascan.core.source.local.InstrackDB
 import dev.forcetower.instascan.core.source.remote.FacebookGraph
 import timber.log.Timber
@@ -36,6 +37,7 @@ class SyncRepository @Inject constructor(
 
         Timber.d("Currently sync ${access.username} ${access.name}")
         syncMedias(id)
+        syncStories(id)
     }
 
     private suspend fun syncMedias(id: String) {
@@ -49,7 +51,7 @@ class SyncRepository @Inject constructor(
         var hasNext = after != null && data.isNotEmpty()
 
         while (hasNext && after != null) {
-            val continuation = service.mediasAfter(id, after)
+            val continuation = service.medias(id, after)
             val appendData = continuation.media?.data?.map { it.toMedia() } ?: emptyList()
             complete += appendData
 
@@ -60,4 +62,29 @@ class SyncRepository @Inject constructor(
         Timber.d("All medias fetched: $complete")
         database.media().insertOrUpdate(complete)
     }
+
+    private suspend fun syncStories(id: String) {
+        val response = service.stories(id)
+        val complete = mutableListOf<Story>()
+
+        val data = response.stories?.data?.map { it.toStoryData() } ?: emptyList()
+        complete += data
+
+        var after = response.stories?.paging?.cursors?.after
+        var hasNext = after != null && data.isNotEmpty()
+
+        while (hasNext && after != null) {
+            val continuation = service.stories(id, after)
+            val appendData = continuation.stories?.data?.map { it.toStoryData() } ?: emptyList()
+            complete += appendData
+
+            after = continuation.stories?.paging?.cursors?.after
+            hasNext = after != null && appendData.isNotEmpty()
+        }
+
+        Timber.d("All stories fetched: $complete")
+        database.story().insertOrUpdate(complete)
+    }
+
+
 }

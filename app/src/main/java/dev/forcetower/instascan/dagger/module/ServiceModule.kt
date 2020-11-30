@@ -18,7 +18,7 @@ object ServiceModule {
     @Singleton
     fun provideFacebookService(client: OkHttpClient, gson: Gson): FacebookGraph {
         return Retrofit.Builder()
-            .baseUrl("https://graph.facebook.com/v4.0/")
+            .baseUrl("https://graph.facebook.com/v8.0/")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
