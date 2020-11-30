@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_login_to_home"
             app:destination="@id/home" />
+        <action
+            android:id="@+id/action_login_to_importer"
+            app:destination="@id/importer" />
     </fragment>
 
     <fragment
@@ -24,4 +27,14 @@
         android:id="@+id/action_global_home"
         app:destination="@id/home"
         app:popUpTo="@id/home_graph.xml" />
+
+    <dialog
+        android:id="@+id/importer"
+        android:name="dev.forcetower.instascan.view.importer.ImporterSheet"
+        android:label="ImporterSheet"
+        tools:layout="@layout/fragment_account_importer">
+        <argument
+            android:name="accounts"
+            app:argType="dev.forcetower.instascan.core.model.dto.InstagramAccountDTO[]" />
+    </dialog>
 </navigation>

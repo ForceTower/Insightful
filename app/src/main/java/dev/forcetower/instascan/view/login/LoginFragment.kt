@@ -29,7 +29,7 @@ class LoginFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return FragmentLoginBinding.inflate(inflater, container, false).also {
             binding = it
             it.actions = viewModel
@@ -48,7 +48,7 @@ class LoginFragment : BaseFragment() {
         viewModel.onFacebookLoginError.observe(viewLifecycleOwner, EventObserver {
             showSnack(getString(R.string.facebook_login_error))
         })
-        viewModel.onReceivedAccounts.observe(viewLifecycleOwner, Observer {
+        viewModel.onReceivedAccounts.observe(viewLifecycleOwner, {
             onAccountsReceived(it)
         })
         viewModel.onImportCompleted.observe(viewLifecycleOwner, EventObserver {
@@ -74,11 +74,8 @@ class LoginFragment : BaseFragment() {
             return
         }
         Timber.d("onAccountsReceived $accounts")
-        ImporterSheet().apply {
-            arguments = bundleOf(
-                "accounts" to accounts
-            )
-        }.show(childFragmentManager, "importer")
+        val directions = LoginFragmentDirections.actionLoginToImporter(accounts.toTypedArray())
+        findNavController().navigate(directions)
     }
 
     private fun onFacebookLogin() {

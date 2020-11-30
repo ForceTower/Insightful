@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import dev.forcetower.instascan.BuildConfig
 import dev.forcetower.instascan.core.source.local.InstrackDB
 import dev.forcetower.instascan.core.utils.GsonUtils
@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 object AppModule {
     @Provides
     @Singleton
