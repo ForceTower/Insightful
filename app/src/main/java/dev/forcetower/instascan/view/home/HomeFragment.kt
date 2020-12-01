@@ -20,7 +20,7 @@ class HomeFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return FragmentHomeBinding.inflate(inflater, container, false).also {
             binding = it
         }.root
