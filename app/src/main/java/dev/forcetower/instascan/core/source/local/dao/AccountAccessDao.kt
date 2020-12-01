@@ -1,10 +1,12 @@
 package dev.forcetower.instascan.core.source.local.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
 import dev.forcetower.instascan.core.model.storage.Account
 import dev.forcetower.instascan.core.model.storage.AccountAccess
 import dev.forcetower.toolkit.database.dao.BaseDao
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 abstract class AccountAccessDao : BaseDao<AccountAccess>() {
@@ -19,6 +21,9 @@ abstract class AccountAccessDao : BaseDao<AccountAccess>() {
 
     @Query("SELECT * FROM AccountAccess WHERE selected = 1")
     abstract suspend fun getCurrentAccountAccess(): AccountAccess?
+
+    @Query("SELECT COUNT(id) FROM AccountAccess")
+    abstract fun getAccessCount(): Flow<Int>
 
     @Query("SELECT * FROM AccountAccess")
     abstract suspend fun getAll(): List<AccountAccess>

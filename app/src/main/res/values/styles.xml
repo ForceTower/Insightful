@@ -1,5 +1,5 @@
 <resources>
-    <style name="InstaScan" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Insightful" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -10,7 +10,16 @@
         <item name="android:windowMinWidthMinor">85%</item>
     </style>
 
-    <style name="InstaScan.Home">
+    <style name="Insightful.Home">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+
+    <style name="Insightful.Launcher">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:statusBarColor">@android:color/transparent</item>

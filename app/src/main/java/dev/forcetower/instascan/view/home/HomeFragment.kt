@@ -28,16 +28,6 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val headerAdapter = HeaderAdapter()
-        val featureAdapter = FeatureAdapter()
-
-        val adapter = ConcatAdapter(headerAdapter, featureAdapter)
-        binding.homeRecycler.adapter = adapter
-
-        featureAdapter.submitList(listOf(
-            HomeFeature("Analise de Mídias", "Descubra estatisticas interessantes sobre suas mídias", R.drawable.likes_lookup, R.color.likes_lookup)
-        ))
-
         viewModel.syncCurrent()
     }
 }

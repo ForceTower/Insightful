@@ -5,7 +5,7 @@
     <data>
         <variable
             name="account"
-            type="dev.forcetower.instascan.core.model.storage.Account" />
+            type="dev.forcetower.instascan.core.model.storage.AccountAccess" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -17,38 +17,27 @@
             android:layout_height="wrap_content"
             app:liftOnScroll="false"
             app:elevation="0dp"
-            style="@style/Widget.MaterialComponents.AppBarLayout.Surface">
+            style="@style/Widget.MaterialComponents.AppBarLayout.Surface"
+            app:paddingStartSystemWindowInsets="@{true}"
+            app:paddingEndSystemWindowInsets="@{true}"
+            app:paddingTopSystemWindowInsets="@{true}">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/avatar"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="16dp"
-                    android:scaleType="centerCrop"
-                    app:clipCircle="@{true}"
-                    app:imageUrl="@{account.profilePictureUrl}"
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name"
+                    android:textSize="27sp"
+                    android:textColor="?attr/colorPrimary"
+                    app:firstBaselineToTopHeight="28dp"
+                    app:fontFamily="@font/calligraffitti"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@tools:sample/avatars" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/menu"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="end"
-                    android:layout_marginStart="16dp"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/ic_menu_hamburger"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -60,10 +49,51 @@
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/avatar"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:scaleType="centerCrop"
+                    app:clipCircle="@{true}"
+                    app:imageUrl="@{account.profilePictureUrl}"
+                    tools:src="@tools:sample/avatars" />
 
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:gravity="center"
+                    android:text="@{account.name}"
+                    android:textSize="18sp"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textAlignment="gravity"
+                    tools:text="Lucian Purifier" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:text="@{account.username}"
+                    android:textAlignment="gravity"
+                    android:gravity="center"
+                    tools:text="lucian_senna" />
+
+                <dev.forcetower.instascan.view.home.widget.FeatureView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginHorizontal="16dp"
+                    app:iconSrc="@drawable/likes_lookup"
+                    app:iconColor="@color/likes_lookup"
+                    app:title="@string/feature_media_analysis"
+                    app:subtitle="@string/feature_media_analysis_desc"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.core.widget.NestedScrollView>

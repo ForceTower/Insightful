@@ -54,4 +54,6 @@ class LoginRepository @Inject constructor(
         database.access().insert(access)
         database.account().insert(account)
     }
+
+    fun getAccess() = database.access().getAccessCount()
 }
