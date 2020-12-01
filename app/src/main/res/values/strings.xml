@@ -13,4 +13,6 @@
     <string name="importer_select_account">Qual conta quer usar?</string>
     <string name="feature_media_analysis">Análise de Mídias</string>
     <string name="feature_media_analysis_desc">Descubra como suas postagens estão se saindo!</string>
+    <string name="feature_post_habits">Hábitos de Postagens</string>
+    <string name="feature_post_habits_desc">Descubra quais horários você posta mais!</string>
 </resources>
